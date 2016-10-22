@@ -1,0 +1,82 @@
+﻿@model SisRep.Models.reposicione
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>reposicione</h4>
+	<hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.comentario)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.comentario)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.horaCreacion)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.horaCreacion)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.horaAsignacion)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.horaAsignacion)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.horaResolucion)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.horaResolucion)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.herramienta.herramienta1)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.herramienta.herramienta1)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.puesto.puesto1)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.puesto.puesto1)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.usuario.nombre)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.usuario.nombre)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.usuario1.nombre)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.usuario1.nombre)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Back to List", "Index")
+</p>

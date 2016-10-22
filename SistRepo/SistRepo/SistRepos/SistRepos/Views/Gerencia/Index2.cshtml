@@ -1,0 +1,91 @@
+﻿@model IEnumerable<SistRepos.Models.ger5>
+
+@{
+    ViewBag.Title = "Sistema de Reposiciones";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<form role="form" action="@Url.Action("Index2")" method="Post" class="form-horizontal" id="formulario">
+
+    <div class="form-group">
+        <div class="col-lg-3"></div>
+        <div class="col-lg-4">
+            <fieldset>
+                <legend>Solicitudes que fueron canceladas</legend>
+                <div class="form-group">
+                    <label for="nombre" class="col-lg-4 control-label">Seleccionar año</label>
+                    <div class="col-lg-8">
+                        <input type="number" min="2013" max="@DateTime.Now.Year" name="yer" class="form-control" />
+                    </div>
+                </div>
+
+
+                <div class="form-group">
+                    <div class="col-lg-2 col-lg-offset-4"><input type="submit" name="print" value="Consultar" class="btn btn-default" onclick="funcImprimirNot()" /></div>
+                    @if (Model != null)
+                    {
+                        <div class="col-lg-2 col-lg-offset-4">
+                            <input type="submit" class="btn btn-default" name="print" value="Imprimir" onclick="funcImprimir()" />
+
+                        </div> }
+                </div>
+            </fieldset>
+        </div>
+    </div>
+</form>
+
+
+
+@if (Model != null)
+{
+<table class="table table-striped table-hover ">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.solicitante)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.horaCreacion)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.horaCancelacion)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.herramienta)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.puesto)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.solicitante)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.horaCreacion)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.horaCancelacion)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.herramienta)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.puesto)
+            </td>
+            <td>
+                @Html.ActionLink("Details", "Details", new { id = item.solicitud })
+            </td>
+        </tr>
+    }
+
+</table>
+}
+else
+{ 
+        <div class="form-group">
+        <div class="col-lg-3"></div>
+        <div class="col-lg-4"><h4>No hay resultados para mostrar</h4> </div></div> }

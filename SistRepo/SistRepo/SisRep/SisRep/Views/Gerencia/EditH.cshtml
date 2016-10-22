@@ -1,0 +1,35 @@
+﻿@model SisRep.Models.herramienta
+
+@{
+    ViewBag.Title = "EditH";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>EditH</h2>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    
+    <div class="form-horizontal">
+        <h4>Cambiar stock de </h4>
+        <hr />
+        @Html.ValidationSummary(true)
+        @Html.HiddenFor(model => model.idHerramienta)
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.stock, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.stock)
+                @Html.ValidationMessageFor(model => model.stock)
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Save" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+}
+

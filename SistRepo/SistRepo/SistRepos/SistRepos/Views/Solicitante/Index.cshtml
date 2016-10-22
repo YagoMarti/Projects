@@ -1,0 +1,78 @@
+﻿@model IEnumerable<SistRepos.Models.reposiciones>
+
+@{
+    ViewBag.Title = "Sistema de Reposiciones";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<form role="form" class="form-horizontal">
+    <div class="form-group">
+        <div class="col-lg-3"></div>
+        <div class="col-lg-4">
+            <fieldset>
+                <legend>Solicitudes activas</legend>
+            </fieldset>
+        </div>
+    </div>
+</form>
+@if (Model != null)
+    {
+    <table class="table table-striped table-hover">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.herramientas.herramienta)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.puestos.puesto)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.horaCreacion)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.horaAsignacion)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.horaResolucion)
+            </th>
+            <th>
+                Operario
+            </th>
+            <th></th>
+        </tr>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.herramientas.herramienta)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.puestos.puesto)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.horaCreacion)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.horaAsignacion)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.horaResolucion)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.operarios.username)
+                </td>
+                <td>
+                    @Html.ActionLink("Detalles", "Details", new { id = item.idReposicion })
+                </td>
+            </tr>
+        }
+    </table>
+    }
+    else
+    {
+    
+    <div class="form-group">
+        <div class="col-lg-3"></div>
+        <div class="col-lg-4">
+            <h2>No se encontraron solicitudes activas</h2> </div> </div>
+            }

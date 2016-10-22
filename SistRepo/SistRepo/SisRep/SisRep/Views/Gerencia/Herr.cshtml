@@ -1,0 +1,35 @@
+﻿@model IEnumerable<SisRep.Models.herramienta>
+
+@{
+    ViewBag.Title = "Herr";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Herr</h2>
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.herramienta1)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.stock)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.herramienta1)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.stock)
+        </td>
+        <td>
+            @Html.ActionLink("Cambiar Stock", "EditH", new { id=item.idHerramienta }) 
+        </td>
+    </tr>
+}
+
+</table>

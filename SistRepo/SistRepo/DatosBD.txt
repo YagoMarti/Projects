@@ -1,0 +1,27 @@
+Prioridades :
+
+
+Vistas de impresión
+JefeSolicitante
+JefeOperario
+Gerencia
+Usuarios
+
+
+Hacer que los siguientes / anteriores sean por código, no por valor... y aplicar que se muestre una determinada cantidad de solicitudes 
+
+Hacer que los dropdown habiliten / modifiquen opciones. 
+
+Normalizar los detalles, edit, y demás en controladores genéricos y no tener muchas vistas iguales.  
+
+
+Herramientas, cambiar tiempo de procesamiento. 
+
+
+
+
+traer libreta, f3, libreta firmada por roxana, - Practica supervisada. 
+
+
+
+<input type="button" value="Print" onclick="window.print();">

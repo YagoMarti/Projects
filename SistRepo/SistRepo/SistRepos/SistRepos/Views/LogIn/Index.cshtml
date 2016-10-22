@@ -1,0 +1,57 @@
+﻿@{
+    ViewBag.Title = "Sistema de Reposiciones";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+
+<form role="form" action="@Url.Action("IniciarSesion", "Usuario")" method="Post" class="form-horizontal">
+    <div class="col-lg-3"></div>
+    <div class="col-lg-4">
+        <fieldset>
+            <legend>Inicio de Sesión</legend>
+            <div class="form-group">
+                <label class="col-lg-4 control-label">Usuario: </label>
+                <div class="col-lg-8">
+                    <input class="form-control" id="usertxt" name="username" placeholder="ingrese su usuario" type="text" required>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-lg-4 control-label">Contraseña: </label>
+                <div class="col-lg-8">
+                    <input class="form-control" id="passtxt" name="claveacc" placeholder="ingrese su clave" type="password" required>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-lg-8 col-lg-offset-4">
+                    <button type="submit" class="btn btn-default">Ingresar</button>
+                </div>
+            </div>
+
+            @if (ViewBag.log == "false") 
+            { 
+                <div class="alert alert-dismissable alert-warning">
+                 <button type="button" class="close" data-dismiss="alert">×</button>
+                <h4>Usuario o Clave erróneos!</h4>
+                <p>De no recordar sus datos, dirigirse a su supervisor.</p>
+                </div>
+            }
+            else
+            {
+                <div class="alert alert-dismissable alert-info">
+                <button type="button" class="close" data-dismiss="alert">×</button>
+                De no recordar su clave, dirigirse a su supervisor.</div>
+                
+            
+            }
+                   
+        </fieldset>
+    </div>
+    
+</form>
+
+
+
+
+

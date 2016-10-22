@@ -1,0 +1,99 @@
+﻿@model SisRep.Models.reposicione
+
+@{
+    ViewBag.Title = "Edit";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Edit</h2>
+
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    
+    <div class="form-horizontal">
+        <h4>reposicione</h4>
+        <hr />
+        @Html.ValidationSummary(true)
+        @Html.HiddenFor(model => model.idReposicion)
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.idOperario, "idOperario", new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownList("idOperario", String.Empty)
+                @Html.ValidationMessageFor(model => model.idOperario)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.idSolicitante, "idSolicitante", new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownList("idSolicitante", String.Empty)
+                @Html.ValidationMessageFor(model => model.idSolicitante)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.idPuesto, "idPuesto", new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownList("idPuesto", String.Empty)
+                @Html.ValidationMessageFor(model => model.idPuesto)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.idHerramienta, "idHerramienta", new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownList("idHerramienta", String.Empty)
+                @Html.ValidationMessageFor(model => model.idHerramienta)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.comentario, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.comentario)
+                @Html.ValidationMessageFor(model => model.comentario)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.horaCreacion, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.horaCreacion)
+                @Html.ValidationMessageFor(model => model.horaCreacion)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.horaAsignacion, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.horaAsignacion)
+                @Html.ValidationMessageFor(model => model.horaAsignacion)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.horaResolucion, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.horaResolucion)
+                @Html.ValidationMessageFor(model => model.horaResolucion)
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Save" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+<script src="~/Scripts/jquery-1.10.2.min.js"></script>
+<script src="~/Scripts/jquery.validate.min.js"></script>
+<script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>

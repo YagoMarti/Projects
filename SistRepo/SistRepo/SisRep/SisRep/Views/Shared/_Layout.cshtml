@@ -1,0 +1,71 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <title>@ViewBag.Title</title>
+    <link href="@Url.Content("~/Content/Site.css")" rel="stylesheet" type="text/css" />
+    <script src="@Url.Content("~/Scripts/jquery-1.7.1.min.js")" type="text/javascript"></script>
+    <script src="@Url.Content("~/Scripts/modernizr-2.5.3.js")" type="text/javascript"></script>
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap-theme.min.css">
+    <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+</head>
+
+<body>
+    <header>
+        <div id="header">
+            <h1>Sistema de Reposiciones</h1>
+            @if (Session["UsuarioLogueado"] != null)
+            {
+                <ul class="nav nav-tabs">
+                    <li>@Html.ActionLink("Inicio", "Empty", "LogIn")</li>
+                    @if (Session["Rol"] == "jop")
+                    {
+                        <li>@Html.ActionLink("Lista de Operarios", "Index", "JefeOperario")</li>
+                        <li>@Html.ActionLink("Solicitudes Activas", "Index2", "JefeOperario")</li>
+                        <li>@Html.ActionLink("Solicitudes Finalizadas", "Index3", "JefeOperario")</li>
+                    }
+                    @if (Session["Rol"] == "jso")
+                    {
+                        <li>@Html.ActionLink("Lista de Solicitantes", "Index", "JefeSolicitante")</li>
+                        <li>@Html.ActionLink("Solicitudes Activas", "Index2", "JefeSolicitante")</li>
+                        <li>@Html.ActionLink("Solicitudes por Solicitante", "Index3", "JefeSolicitante")</li>
+                    }
+                    @if (Session["Rol"] == "ope")
+                    {
+                        <li>@Html.ActionLink("Lista de Solicitudes", "Index", "Operario")</li>
+                    }
+                    @if (Session["Rol"] == "sol")
+                    {
+                        <li>@Html.ActionLink("Cargar Solicitudes", "Create", "Solicitante")</li>
+                        <li>@Html.ActionLink("Consultar Solicitudes", "Index", "Solicitante")</li>
+                        <li>@Html.ActionLink("Consultar Solicitudes Finalizadas", "Index2", "Solicitante")</li>
+                    }
+                    @if (Session["Rol"] == "usr")
+                    {
+                        <li>@Html.ActionLink("Lista Usuarios", "Index", "Usuario")</li>
+                        <li>@Html.ActionLink("Cargar Usuarios", "Create", "Usuario")</li>
+                    }
+                    @if (Session["Rol"] == "ger")
+                    {
+                        <li>@Html.ActionLink("Herramientas", "Herr", "Gerencia")</li>
+                    }
+                    <li>@Html.ActionLink("Cambiar Clave", "CambiarClave", "Usuario")</li>
+                    <li>@Html.ActionLink("Cerrar sesion", "CerrarSesion", "Usuario",null, new { onclick = "return confirm('Cerrar?');" } ) </li>
+                </ul>
+            }
+            else {  }
+        </div>
+    </header>
+
+    <div id="body">
+        @RenderBody()
+    </div>  <br />
+
+    <footer>
+        <div id="footer">
+            Página desarrollada por : <strong>Marti, Yago Gonzalo</strong> || Legajo : 106359<br>
+        </div>
+    </footer>
+</body>
+</html>

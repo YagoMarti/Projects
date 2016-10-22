@@ -1,0 +1,196 @@
+﻿@model SistRepos.Models.usuarios
+
+@{
+    ViewBag.Title = "Sistema de Reposiciones";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+
+
+
+<form role="form" action="@Url.Action("Create")" method="Post" class="form-horizontal">
+
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+    <div class="form-group">
+        <div class="col-lg-3"></div>
+        <div class="col-lg-4">
+            <fieldset>
+                <legend>Cargar Usuarios</legend>
+                <div class="form-group">
+                    <label class="col-lg-4 control-label">Nombre</label>
+                    <div class="col-lg-8">
+                        @Html.TextBoxFor(model => model.nombre, new { @class = "form-control" , @placeholder = "ingrese el nombre" })
+                    </div>
+                    <div class="col-lg-3">
+                        
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="col-lg-4 control-label">Apellido</label>
+                    <div class="col-lg-8">
+                        @Html.TextBoxFor(model => model.apellido, new { @class = "form-control", @placeholder = "ingrese el apellido" })
+                    </div>
+                    <div class="col-lg-3">
+                        
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="col-lg-4 control-label">Teléfono</label>
+                    <div class="col-lg-8">
+                        @Html.TextBoxFor(model => model.telefono, new { @class = "form-control" })
+                    </div>
+                    <div class="col-lg-3">
+                        @Html.ValidationMessageFor(model => model.telefono)
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="col-lg-4 control-label">Nombre de usuario</label>
+                    <div class="col-lg-8">
+                        @Html.TextBoxFor(model => model.username, new { @class = "form-control", @placeholder = "ingrese el usuario", @onchange = "userVal();" })
+                    </div>
+                    <div class="col-lg-3">
+
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="col-lg-4 control-label">Localidad</label>
+                    <div class="col-lg-8">
+                        @Html.DropDownList("idLocalidad", null, String.Empty, new { @class = "form-control" })
+                    </div>
+                    <div class="col-lg-3">
+                        @Html.ValidationMessageFor(model => model.idLocalidad)
+                    </div>
+                </div>
+
+                
+                <div class="form-group">
+                    <label class="col-lg-4 control-label">Puesto</label>
+                    <div class="col-lg-8">
+                        @Html.DropDownList("idRol", null, String.Empty, new { @class = "form-control", @onchange = "roles()" })
+                    </div>
+                    <div class="col-lg-3">
+
+                    </div>
+                </div>
+
+
+                <div class="form-group">
+                    <label class="col-lg-4 control-label">Supervisor</label>
+                    <div class="col-lg-8">
+                        <select name="idSupervisor" id="idSupervisor" class="form-control">
+                            
+                        </select>
+                        
+                    </div>
+                    <div class="col-lg-3">
+                        @Html.ValidationMessageFor(model => model.idSupervisor)
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-lg-2"></div>
+                    <div class="col-lg-2"><a href="javascript:history.back(-1);" class="btn btn-danger" role="button">Cancelar</a></div>
+                    <div class="col-lg-2">
+                        <input type="submit" value="Cargar" class="btn btn-default" id="cargar" />
+                    </div>
+                </div>
+
+
+            </fieldset>
+        </div>
+
+        <div class="col-lg-4">
+            <div class="form-group"></div><div class="form-group"></div><div class="form-group"></div> <div class="form-group"></div>
+            <div class="form-group">
+                <div class="col-lg-7">
+                    @Html.ValidationMessageFor(model => model.nombre) <label style="color:white">.</label>
+                </div>
+            </div>
+            <div class="form-group"></div>
+            <div class="form-group">
+                <div class="col-lg-7">
+                    @Html.ValidationMessageFor(model => model.apellido) <label style="color:white">.</label>
+                </div>
+            </div>  <div class="form-group"></div> <div class="form-group"></div> <div class="form-group"></div> <div class="form-group"></div> 
+            <div class="form-group">
+                <div class="col-lg-7">
+                    @Html.ValidationMessageFor(model => model.username) <label style="color:white">.</label> <label style="color:white">.</label> 
+                </div>
+            </div>
+         <div class="form-group"></div> <div class="form-group"></div> <div class="form-group"></div> <div class="form-group"></div> <div class="form-group"></div>
+            <div class="form-group">
+                <div class="col-lg-7">
+                    @Html.ValidationMessageFor(model => model.idRol)
+                </div>
+            </div>
+        </div>
+
+
+        
+
+
+
+    </div>
+</form>
+
+
+
+
+<script src="~/Scripts/jquery-1.10.2.min.js"></script>
+<script src="~/Scripts/jquery.validate.min.js"></script>
+<script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+<script src="~/Scripts/jquery-1.8.2.min.js"></script>
+<script src="~/Scripts/jquery-ui-1.8.24.min.js"></script>
+
+
+<script>
+        function roles() {
+            $("#idSupervisor").empty();
+            $.ajax({
+                type: 'POST',
+                url: '@Url.Action("getRoles")',
+                dataType: 'json',
+                data: { idRol: $("#idRol").val() },
+                success: function (lista) {
+                    $.each(lista, function (i, lista) {
+                        $("#idSupervisor").append('<option value="' + lista.Value + '">' +
+                         lista.Text + '</option>');
+                    });
+                },
+                error: function (ex) {
+                    alert('Failed to retrieve.' + ex);
+                }
+            });
+            return false;
+        };
+
+
+    function userVal()
+    {
+        $.ajax({
+            type: 'POST',
+            url: '@Url.Action("getUsers")',
+            dataType: 'json',
+            data: { user: $("#username").val() },
+            success: function (result) {
+                if (result.success) {
+                    $('#cargar').removeAttr("disabled");
+                }
+                else {
+                    $('#cargar').attr("disabled", true);
+                    alert('Nombre de usuario en uso');
+                }
+            },
+            error: function (ex) {
+                $('#cargar').removeAttr("disabled");
+            }
+
+        });
+    }
+</script>
+

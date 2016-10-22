@@ -1,0 +1,81 @@
+﻿@model SistRepos.Models.reposiciones
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Sistema de Reposiciones</title>
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap-theme.min.css">
+    <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+
+</head>
+<body onload="window.print();">
+    <form role="form" class="form-horizontal">
+        <div class="form-group">
+            <div class="col-lg-3"></div>
+            <div class="col-lg-4">
+                <fieldset>
+                    <legend>Detalles reposición Nº <strong>@ViewBag.sol</strong></legend>
+                    <div class="form-group">
+                        <label class="col-lg-4 control-label">@Html.DisplayNameFor(model => model.herramientas.herramienta):</label> 
+                        <label class="col-lg-8 control-label">
+                            @Html.DisplayFor(model => model.herramientas.herramienta)
+                        </label>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-lg-4 control-label">@Html.DisplayNameFor(model => model.puestos.puesto):</label>
+                        <label class="col-lg-8 control-label">
+                            @Html.DisplayFor(model => model.puestos.puesto)
+                        </label>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-lg-4 control-label">@Html.DisplayNameFor(model => model.comentario):</label>
+                        <label class="col-lg-8 control-label">
+                            @Html.DisplayFor(model => model.comentario)
+                        </label>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-lg-4 control-label">@Html.DisplayNameFor(model => model.horaCreacion):</label>
+                        <label class="col-lg-8 control-label">
+                            @Html.DisplayFor(model => model.horaCreacion)
+                        </label>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-lg-4 control-label">@Html.DisplayNameFor(model => model.horaAsignacion):</label>
+                        <label class="col-lg-8 control-label">
+                            @Html.DisplayFor(model => model.horaAsignacion)
+                        </label>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-lg-4 control-label">@Html.DisplayNameFor(model => model.horaResolucion):</label>
+                        <label class="col-lg-8 control-label">
+                            @Html.DisplayFor(model => model.horaResolucion)
+                        </label>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-lg-4 control-label">Solicitante:</label>
+                        <label class="col-lg-8 control-label">
+                            @Html.DisplayFor(model => model.solicitantes.username)
+                        </label>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-lg-4 control-label">Operario:</label>
+                        <label class="col-lg-8 control-label">
+                            @Html.DisplayFor(model => model.operarios.username)
+                        </label>
+                    </div>
+                </fieldset>
+            </div>
+        </div>
+    </form>
+</body>
+
+
+</html>

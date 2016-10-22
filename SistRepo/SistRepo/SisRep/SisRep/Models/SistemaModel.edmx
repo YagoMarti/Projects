@@ -1,0 +1,722 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="ReposicionesModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="estados">
+          <Key>
+            <PropertyRef Name="idEstado" />
+          </Key>
+          <Property Name="idEstado" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="estado" Type="varchar" MaxLength="25" Nullable="false" />
+        </EntityType>
+        <EntityType Name="herramientas">
+          <Key>
+            <PropertyRef Name="idHerramienta" />
+          </Key>
+          <Property Name="idHerramienta" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="herramienta" Type="varchar" MaxLength="25" />
+          <Property Name="stock" Type="int" />
+        </EntityType>
+        <EntityType Name="localidades">
+          <Key>
+            <PropertyRef Name="idLocalidad" />
+          </Key>
+          <Property Name="idLocalidad" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="localidad" Type="varchar" MaxLength="20" />
+          <Property Name="idProvincia" Type="int" />
+        </EntityType>
+        <EntityType Name="pisos">
+          <Key>
+            <PropertyRef Name="idPiso" />
+          </Key>
+          <Property Name="idPiso" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="idSucursal" Type="int" />
+          <Property Name="piso" Type="int" />
+        </EntityType>
+        <EntityType Name="provincias">
+          <Key>
+            <PropertyRef Name="idProvincia" />
+          </Key>
+          <Property Name="idProvincia" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="provincia" Type="varchar" MaxLength="20" />
+        </EntityType>
+        <EntityType Name="puestos">
+          <Key>
+            <PropertyRef Name="idPuesto" />
+          </Key>
+          <Property Name="idPuesto" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="idPiso" Type="int" />
+          <Property Name="puesto" Type="varchar" MaxLength="20" />
+        </EntityType>
+        <EntityType Name="reposiciones">
+          <Key>
+            <PropertyRef Name="idReposicion" />
+          </Key>
+          <Property Name="idReposicion" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="idOperario" Type="int" />
+          <Property Name="idSolicitante" Type="int" />
+          <Property Name="idPuesto" Type="int" />
+          <Property Name="idHerramienta" Type="int" />
+          <Property Name="comentario" Type="varchar" MaxLength="100" />
+          <Property Name="horaCreacion" Type="datetime" />
+          <Property Name="horaAsignacion" Type="datetime" />
+          <Property Name="horaResolucion" Type="datetime" />
+          <Property Name="idEstado" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="roles">
+          <Key>
+            <PropertyRef Name="idRol" />
+          </Key>
+          <Property Name="idRol" Type="varchar" MaxLength="3" Nullable="false" />
+          <Property Name="rol" Type="varchar" MaxLength="25" />
+        </EntityType>
+        <EntityType Name="sucursales">
+          <Key>
+            <PropertyRef Name="idSucursal" />
+          </Key>
+          <Property Name="idSucursal" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="sucursal" Type="varchar" MaxLength="20" />
+        </EntityType>
+        <EntityType Name="usuarios">
+          <Key>
+            <PropertyRef Name="idUsuario" />
+          </Key>
+          <Property Name="idUsuario" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="nombre" Type="varchar" MaxLength="30" />
+          <Property Name="apellido" Type="varchar" MaxLength="30" />
+          <Property Name="telefono" Type="varchar" MaxLength="18" />
+          <Property Name="fechaNacimiento" Type="datetime" />
+          <Property Name="fechaContratacion" Type="datetime" />
+          <Property Name="idRol" Type="varchar" MaxLength="3" Nullable="false" />
+          <Property Name="idLocalidad" Type="int" />
+          <Property Name="username" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="claveacc" Type="varchar" MaxLength="20" />
+          <Property Name="idSupervisor" Type="int" />
+        </EntityType>
+        <Association Name="fk_estado">
+          <End Role="estados" Type="Self.estados" Multiplicity="1" />
+          <End Role="reposiciones" Type="Self.reposiciones" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="estados">
+              <PropertyRef Name="idEstado" />
+            </Principal>
+            <Dependent Role="reposiciones">
+              <PropertyRef Name="idEstado" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_her">
+          <End Role="herramientas" Type="Self.herramientas" Multiplicity="0..1" />
+          <End Role="reposiciones" Type="Self.reposiciones" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="herramientas">
+              <PropertyRef Name="idHerramienta" />
+            </Principal>
+            <Dependent Role="reposiciones">
+              <PropertyRef Name="idHerramienta" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_loc">
+          <End Role="localidades" Type="Self.localidades" Multiplicity="0..1" />
+          <End Role="usuarios" Type="Self.usuarios" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="localidades">
+              <PropertyRef Name="idLocalidad" />
+            </Principal>
+            <Dependent Role="usuarios">
+              <PropertyRef Name="idLocalidad" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_op">
+          <End Role="usuarios" Type="Self.usuarios" Multiplicity="0..1" />
+          <End Role="reposiciones" Type="Self.reposiciones" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="usuarios">
+              <PropertyRef Name="idUsuario" />
+            </Principal>
+            <Dependent Role="reposiciones">
+              <PropertyRef Name="idOperario" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_piso">
+          <End Role="pisos" Type="Self.pisos" Multiplicity="0..1" />
+          <End Role="puestos" Type="Self.puestos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="pisos">
+              <PropertyRef Name="idPiso" />
+            </Principal>
+            <Dependent Role="puestos">
+              <PropertyRef Name="idPiso" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_prov">
+          <End Role="provincias" Type="Self.provincias" Multiplicity="0..1" />
+          <End Role="localidades" Type="Self.localidades" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="provincias">
+              <PropertyRef Name="idProvincia" />
+            </Principal>
+            <Dependent Role="localidades">
+              <PropertyRef Name="idProvincia" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_pue">
+          <End Role="puestos" Type="Self.puestos" Multiplicity="0..1" />
+          <End Role="reposiciones" Type="Self.reposiciones" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="puestos">
+              <PropertyRef Name="idPuesto" />
+            </Principal>
+            <Dependent Role="reposiciones">
+              <PropertyRef Name="idPuesto" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_rol">
+          <End Role="roles" Type="Self.roles" Multiplicity="1" />
+          <End Role="usuarios" Type="Self.usuarios" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="roles">
+              <PropertyRef Name="idRol" />
+            </Principal>
+            <Dependent Role="usuarios">
+              <PropertyRef Name="idRol" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_sol">
+          <End Role="usuarios" Type="Self.usuarios" Multiplicity="0..1" />
+          <End Role="reposiciones" Type="Self.reposiciones" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="usuarios">
+              <PropertyRef Name="idUsuario" />
+            </Principal>
+            <Dependent Role="reposiciones">
+              <PropertyRef Name="idSolicitante" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_suc">
+          <End Role="sucursales" Type="Self.sucursales" Multiplicity="0..1" />
+          <End Role="pisos" Type="Self.pisos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="sucursales">
+              <PropertyRef Name="idSucursal" />
+            </Principal>
+            <Dependent Role="pisos">
+              <PropertyRef Name="idSucursal" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_sup">
+          <End Role="usuarios" Type="Self.usuarios" Multiplicity="0..1" />
+          <End Role="usuarios1" Type="Self.usuarios" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="usuarios">
+              <PropertyRef Name="idUsuario" />
+            </Principal>
+            <Dependent Role="usuarios1">
+              <PropertyRef Name="idSupervisor" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="ReposicionesModelStoreContainer">
+          <EntitySet Name="estados" EntityType="Self.estados" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="herramientas" EntityType="Self.herramientas" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="localidades" EntityType="Self.localidades" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="pisos" EntityType="Self.pisos" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="provincias" EntityType="Self.provincias" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="puestos" EntityType="Self.puestos" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="reposiciones" EntityType="Self.reposiciones" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="roles" EntityType="Self.roles" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="sucursales" EntityType="Self.sucursales" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="usuarios" EntityType="Self.usuarios" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="fk_estado" Association="Self.fk_estado">
+            <End Role="estados" EntitySet="estados" />
+            <End Role="reposiciones" EntitySet="reposiciones" />
+          </AssociationSet>
+          <AssociationSet Name="fk_her" Association="Self.fk_her">
+            <End Role="herramientas" EntitySet="herramientas" />
+            <End Role="reposiciones" EntitySet="reposiciones" />
+          </AssociationSet>
+          <AssociationSet Name="fk_loc" Association="Self.fk_loc">
+            <End Role="localidades" EntitySet="localidades" />
+            <End Role="usuarios" EntitySet="usuarios" />
+          </AssociationSet>
+          <AssociationSet Name="fk_op" Association="Self.fk_op">
+            <End Role="usuarios" EntitySet="usuarios" />
+            <End Role="reposiciones" EntitySet="reposiciones" />
+          </AssociationSet>
+          <AssociationSet Name="fk_piso" Association="Self.fk_piso">
+            <End Role="pisos" EntitySet="pisos" />
+            <End Role="puestos" EntitySet="puestos" />
+          </AssociationSet>
+          <AssociationSet Name="fk_prov" Association="Self.fk_prov">
+            <End Role="provincias" EntitySet="provincias" />
+            <End Role="localidades" EntitySet="localidades" />
+          </AssociationSet>
+          <AssociationSet Name="fk_pue" Association="Self.fk_pue">
+            <End Role="puestos" EntitySet="puestos" />
+            <End Role="reposiciones" EntitySet="reposiciones" />
+          </AssociationSet>
+          <AssociationSet Name="fk_rol" Association="Self.fk_rol">
+            <End Role="roles" EntitySet="roles" />
+            <End Role="usuarios" EntitySet="usuarios" />
+          </AssociationSet>
+          <AssociationSet Name="fk_sol" Association="Self.fk_sol">
+            <End Role="usuarios" EntitySet="usuarios" />
+            <End Role="reposiciones" EntitySet="reposiciones" />
+          </AssociationSet>
+          <AssociationSet Name="fk_suc" Association="Self.fk_suc">
+            <End Role="sucursales" EntitySet="sucursales" />
+            <End Role="pisos" EntitySet="pisos" />
+          </AssociationSet>
+          <AssociationSet Name="fk_sup" Association="Self.fk_sup">
+            <End Role="usuarios" EntitySet="usuarios" />
+            <End Role="usuarios1" EntitySet="usuarios" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="ReposicionesModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="herramienta">
+          <Key>
+            <PropertyRef Name="idHerramienta" />
+          </Key>
+          <Property Name="idHerramienta" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="herramienta1" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="reposiciones" Relationship="Self.fk_her" FromRole="herramientas" ToRole="reposiciones" />
+          <Property Name="stock" Type="Int32" />
+        </EntityType>
+        <EntityType Name="localidade">
+          <Key>
+            <PropertyRef Name="idLocalidad" />
+          </Key>
+          <Property Name="idLocalidad" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="localidad" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="idProvincia" Type="Int32" />
+          <NavigationProperty Name="usuarios" Relationship="Self.fk_loc" FromRole="localidades" ToRole="usuarios" />
+          <NavigationProperty Name="provincia" Relationship="Self.fk_prov" FromRole="localidades" ToRole="provincias" />
+        </EntityType>
+        <EntityType Name="piso">
+          <Key>
+            <PropertyRef Name="idPiso" />
+          </Key>
+          <Property Name="idPiso" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="idSucursal" Type="Int32" />
+          <Property Name="piso1" Type="Int32" />
+          <NavigationProperty Name="puestos" Relationship="Self.fk_piso" FromRole="pisos" ToRole="puestos" />
+          <NavigationProperty Name="sucursale" Relationship="Self.fk_suc" FromRole="pisos" ToRole="sucursales" />
+        </EntityType>
+        <EntityType Name="provincia">
+          <Key>
+            <PropertyRef Name="idProvincia" />
+          </Key>
+          <Property Name="idProvincia" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="provincia1" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="localidades" Relationship="Self.fk_prov" FromRole="provincias" ToRole="localidades" />
+        </EntityType>
+        <EntityType Name="puesto">
+          <Key>
+            <PropertyRef Name="idPuesto" />
+          </Key>
+          <Property Name="idPuesto" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="idPiso" Type="Int32" />
+          <Property Name="puesto1" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="piso" Relationship="Self.fk_piso" FromRole="puestos" ToRole="pisos" />
+          <NavigationProperty Name="reposiciones" Relationship="Self.fk_pue" FromRole="puestos" ToRole="reposiciones" />
+        </EntityType>
+        <EntityType Name="reposicione">
+          <Key>
+            <PropertyRef Name="idReposicion" />
+          </Key>
+          <Property Name="idReposicion" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="idOperario" Type="Int32" />
+          <Property Name="idSolicitante" Type="Int32" />
+          <Property Name="idPuesto" Type="Int32" />
+          <Property Name="idHerramienta" Type="Int32" />
+          <Property Name="comentario" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="horaCreacion" Type="DateTime" Precision="3" />
+          <Property Name="horaAsignacion" Type="DateTime" Precision="3" />
+          <Property Name="horaResolucion" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="herramienta" Relationship="Self.fk_her" FromRole="reposiciones" ToRole="herramientas" />
+          <NavigationProperty Name="puesto" Relationship="Self.fk_pue" FromRole="reposiciones" ToRole="puestos" />
+          <NavigationProperty Name="usuario" Relationship="Self.fk_op" FromRole="reposiciones" ToRole="usuarios" />
+          <NavigationProperty Name="usuario1" Relationship="Self.fk_sol" FromRole="reposiciones" ToRole="usuarios" />
+          <Property Name="idEstado" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="estado" Relationship="ReposicionesModel.fk_estado" FromRole="reposicione" ToRole="estado" />
+        </EntityType>
+        <EntityType Name="role">
+          <Key>
+            <PropertyRef Name="idRol" />
+          </Key>
+          <Property Name="idRol" Type="String" MaxLength="3" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="rol" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="usuarios" Relationship="Self.fk_rol" FromRole="roles" ToRole="usuarios" />
+        </EntityType>
+        <EntityType Name="sucursale">
+          <Key>
+            <PropertyRef Name="idSucursal" />
+          </Key>
+          <Property Name="idSucursal" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="sucursal" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="pisos" Relationship="Self.fk_suc" FromRole="sucursales" ToRole="pisos" />
+        </EntityType>
+        <EntityType Name="usuario">
+          <Key>
+            <PropertyRef Name="idUsuario" />
+          </Key>
+          <Property Name="idUsuario" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="nombre" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="apellido" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="telefono" Type="String" MaxLength="18" FixedLength="false" Unicode="false" />
+          <Property Name="fechaNacimiento" Type="DateTime" Precision="3" />
+          <Property Name="fechaContratacion" Type="DateTime" Precision="3" />
+          <Property Name="idRol" Type="String" MaxLength="3" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="idLocalidad" Type="Int32" />
+          <Property Name="username" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="claveacc" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="idSupervisor" Type="Int32" />
+          <NavigationProperty Name="localidade" Relationship="Self.fk_loc" FromRole="usuarios" ToRole="localidades" />
+          <NavigationProperty Name="reposiciones" Relationship="Self.fk_op" FromRole="usuarios" ToRole="reposiciones" />
+          <NavigationProperty Name="reposiciones1" Relationship="Self.fk_sol" FromRole="usuarios" ToRole="reposiciones" />
+          <NavigationProperty Name="role" Relationship="Self.fk_rol" FromRole="usuarios" ToRole="roles" />
+          <NavigationProperty Name="usuarios1" Relationship="Self.fk_sup" FromRole="usuarios" ToRole="usuarios1" />
+          <NavigationProperty Name="usuario1" Relationship="Self.fk_sup" FromRole="usuarios1" ToRole="usuarios" />
+        </EntityType>
+        <Association Name="fk_her">
+          <End Role="herramientas" Type="Self.herramienta" Multiplicity="0..1" />
+          <End Role="reposiciones" Type="Self.reposicione" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="herramientas">
+              <PropertyRef Name="idHerramienta" />
+            </Principal>
+            <Dependent Role="reposiciones">
+              <PropertyRef Name="idHerramienta" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_loc">
+          <End Role="localidades" Type="Self.localidade" Multiplicity="0..1" />
+          <End Role="usuarios" Type="Self.usuario" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="localidades">
+              <PropertyRef Name="idLocalidad" />
+            </Principal>
+            <Dependent Role="usuarios">
+              <PropertyRef Name="idLocalidad" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_prov">
+          <End Role="provincias" Type="Self.provincia" Multiplicity="0..1" />
+          <End Role="localidades" Type="Self.localidade" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="provincias">
+              <PropertyRef Name="idProvincia" />
+            </Principal>
+            <Dependent Role="localidades">
+              <PropertyRef Name="idProvincia" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_piso">
+          <End Role="pisos" Type="Self.piso" Multiplicity="0..1" />
+          <End Role="puestos" Type="Self.puesto" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="pisos">
+              <PropertyRef Name="idPiso" />
+            </Principal>
+            <Dependent Role="puestos">
+              <PropertyRef Name="idPiso" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_suc">
+          <End Role="sucursales" Type="Self.sucursale" Multiplicity="0..1" />
+          <End Role="pisos" Type="Self.piso" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="sucursales">
+              <PropertyRef Name="idSucursal" />
+            </Principal>
+            <Dependent Role="pisos">
+              <PropertyRef Name="idSucursal" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_pue">
+          <End Role="puestos" Type="Self.puesto" Multiplicity="0..1" />
+          <End Role="reposiciones" Type="Self.reposicione" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="puestos">
+              <PropertyRef Name="idPuesto" />
+            </Principal>
+            <Dependent Role="reposiciones">
+              <PropertyRef Name="idPuesto" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_op">
+          <End Role="usuarios" Type="Self.usuario" Multiplicity="0..1" />
+          <End Role="reposiciones" Type="Self.reposicione" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="usuarios">
+              <PropertyRef Name="idUsuario" />
+            </Principal>
+            <Dependent Role="reposiciones">
+              <PropertyRef Name="idOperario" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_sol">
+          <End Role="usuarios" Type="Self.usuario" Multiplicity="0..1" />
+          <End Role="reposiciones" Type="Self.reposicione" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="usuarios">
+              <PropertyRef Name="idUsuario" />
+            </Principal>
+            <Dependent Role="reposiciones">
+              <PropertyRef Name="idSolicitante" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_rol">
+          <End Role="roles" Type="Self.role" Multiplicity="0..1" />
+          <End Role="usuarios" Type="Self.usuario" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="roles">
+              <PropertyRef Name="idRol" />
+            </Principal>
+            <Dependent Role="usuarios">
+              <PropertyRef Name="idRol" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_sup">
+          <End Role="usuarios" Type="Self.usuario" Multiplicity="0..1" />
+          <End Role="usuarios1" Type="Self.usuario" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="usuarios">
+              <PropertyRef Name="idUsuario" />
+            </Principal>
+            <Dependent Role="usuarios1">
+              <PropertyRef Name="idSupervisor" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="ReposicionesEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="herramientas" EntityType="Self.herramienta" />
+          <EntitySet Name="localidades" EntityType="Self.localidade" />
+          <EntitySet Name="pisos" EntityType="Self.piso" />
+          <EntitySet Name="provincias" EntityType="Self.provincia" />
+          <EntitySet Name="puestos" EntityType="Self.puesto" />
+          <EntitySet Name="reposiciones" EntityType="Self.reposicione" />
+          <EntitySet Name="roles" EntityType="Self.role" />
+          <EntitySet Name="sucursales" EntityType="Self.sucursale" />
+          <EntitySet Name="usuarios" EntityType="Self.usuario" />
+          <AssociationSet Name="fk_her" Association="Self.fk_her">
+            <End Role="herramientas" EntitySet="herramientas" />
+            <End Role="reposiciones" EntitySet="reposiciones" />
+          </AssociationSet>
+          <AssociationSet Name="fk_loc" Association="Self.fk_loc">
+            <End Role="localidades" EntitySet="localidades" />
+            <End Role="usuarios" EntitySet="usuarios" />
+          </AssociationSet>
+          <AssociationSet Name="fk_prov" Association="Self.fk_prov">
+            <End Role="provincias" EntitySet="provincias" />
+            <End Role="localidades" EntitySet="localidades" />
+          </AssociationSet>
+          <AssociationSet Name="fk_piso" Association="Self.fk_piso">
+            <End Role="pisos" EntitySet="pisos" />
+            <End Role="puestos" EntitySet="puestos" />
+          </AssociationSet>
+          <AssociationSet Name="fk_suc" Association="Self.fk_suc">
+            <End Role="sucursales" EntitySet="sucursales" />
+            <End Role="pisos" EntitySet="pisos" />
+          </AssociationSet>
+          <AssociationSet Name="fk_pue" Association="Self.fk_pue">
+            <End Role="puestos" EntitySet="puestos" />
+            <End Role="reposiciones" EntitySet="reposiciones" />
+          </AssociationSet>
+          <AssociationSet Name="fk_op" Association="Self.fk_op">
+            <End Role="usuarios" EntitySet="usuarios" />
+            <End Role="reposiciones" EntitySet="reposiciones" />
+          </AssociationSet>
+          <AssociationSet Name="fk_sol" Association="Self.fk_sol">
+            <End Role="usuarios" EntitySet="usuarios" />
+            <End Role="reposiciones" EntitySet="reposiciones" />
+          </AssociationSet>
+          <AssociationSet Name="fk_rol" Association="Self.fk_rol">
+            <End Role="roles" EntitySet="roles" />
+            <End Role="usuarios" EntitySet="usuarios" />
+          </AssociationSet>
+          <AssociationSet Name="fk_sup" Association="Self.fk_sup">
+            <End Role="usuarios" EntitySet="usuarios" />
+            <End Role="usuarios1" EntitySet="usuarios" />
+          </AssociationSet>
+          <EntitySet Name="estados" EntityType="ReposicionesModel.estado" />
+          <AssociationSet Name="fk_estado" Association="ReposicionesModel.fk_estado">
+            <End Role="estado" EntitySet="estados" />
+            <End Role="reposicione" EntitySet="reposiciones" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="estado">
+          <Key>
+            <PropertyRef Name="idEstado" />
+          </Key>
+          <Property Name="idEstado" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="estado1" Type="String" Nullable="false" MaxLength="25" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="reposiciones" Relationship="ReposicionesModel.fk_estado" FromRole="estado" ToRole="reposicione" />
+        </EntityType>
+        <Association Name="fk_estado">
+          <End Type="ReposicionesModel.estado" Role="estado" Multiplicity="1" />
+          <End Type="ReposicionesModel.reposicione" Role="reposicione" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="estado">
+              <PropertyRef Name="idEstado" />
+            </Principal>
+            <Dependent Role="reposicione">
+              <PropertyRef Name="idEstado" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="ReposicionesModelStoreContainer" CdmEntityContainer="ReposicionesEntities">
+          <EntitySetMapping Name="herramientas">
+            <EntityTypeMapping TypeName="ReposicionesModel.herramienta">
+              <MappingFragment StoreEntitySet="herramientas">
+                <ScalarProperty Name="stock" ColumnName="stock" />
+                <ScalarProperty Name="idHerramienta" ColumnName="idHerramienta" />
+                <ScalarProperty Name="herramienta1" ColumnName="herramienta" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="localidades">
+            <EntityTypeMapping TypeName="ReposicionesModel.localidade">
+              <MappingFragment StoreEntitySet="localidades">
+                <ScalarProperty Name="idLocalidad" ColumnName="idLocalidad" />
+                <ScalarProperty Name="localidad" ColumnName="localidad" />
+                <ScalarProperty Name="idProvincia" ColumnName="idProvincia" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="pisos">
+            <EntityTypeMapping TypeName="ReposicionesModel.piso">
+              <MappingFragment StoreEntitySet="pisos">
+                <ScalarProperty Name="idPiso" ColumnName="idPiso" />
+                <ScalarProperty Name="idSucursal" ColumnName="idSucursal" />
+                <ScalarProperty Name="piso1" ColumnName="piso" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="provincias">
+            <EntityTypeMapping TypeName="ReposicionesModel.provincia">
+              <MappingFragment StoreEntitySet="provincias">
+                <ScalarProperty Name="idProvincia" ColumnName="idProvincia" />
+                <ScalarProperty Name="provincia1" ColumnName="provincia" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="puestos">
+            <EntityTypeMapping TypeName="ReposicionesModel.puesto">
+              <MappingFragment StoreEntitySet="puestos">
+                <ScalarProperty Name="idPuesto" ColumnName="idPuesto" />
+                <ScalarProperty Name="idPiso" ColumnName="idPiso" />
+                <ScalarProperty Name="puesto1" ColumnName="puesto" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="reposiciones">
+            <EntityTypeMapping TypeName="ReposicionesModel.reposicione">
+              <MappingFragment StoreEntitySet="reposiciones">
+                <ScalarProperty Name="idEstado" ColumnName="idEstado" />
+                <ScalarProperty Name="idReposicion" ColumnName="idReposicion" />
+                <ScalarProperty Name="idOperario" ColumnName="idOperario" />
+                <ScalarProperty Name="idSolicitante" ColumnName="idSolicitante" />
+                <ScalarProperty Name="idPuesto" ColumnName="idPuesto" />
+                <ScalarProperty Name="idHerramienta" ColumnName="idHerramienta" />
+                <ScalarProperty Name="comentario" ColumnName="comentario" />
+                <ScalarProperty Name="horaCreacion" ColumnName="horaCreacion" />
+                <ScalarProperty Name="horaAsignacion" ColumnName="horaAsignacion" />
+                <ScalarProperty Name="horaResolucion" ColumnName="horaResolucion" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="roles">
+            <EntityTypeMapping TypeName="ReposicionesModel.role">
+              <MappingFragment StoreEntitySet="roles">
+                <ScalarProperty Name="idRol" ColumnName="idRol" />
+                <ScalarProperty Name="rol" ColumnName="rol" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sucursales">
+            <EntityTypeMapping TypeName="ReposicionesModel.sucursale">
+              <MappingFragment StoreEntitySet="sucursales">
+                <ScalarProperty Name="idSucursal" ColumnName="idSucursal" />
+                <ScalarProperty Name="sucursal" ColumnName="sucursal" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="usuarios">
+            <EntityTypeMapping TypeName="ReposicionesModel.usuario">
+              <MappingFragment StoreEntitySet="usuarios">
+                <ScalarProperty Name="idUsuario" ColumnName="idUsuario" />
+                <ScalarProperty Name="nombre" ColumnName="nombre" />
+                <ScalarProperty Name="apellido" ColumnName="apellido" />
+                <ScalarProperty Name="telefono" ColumnName="telefono" />
+                <ScalarProperty Name="fechaNacimiento" ColumnName="fechaNacimiento" />
+                <ScalarProperty Name="fechaContratacion" ColumnName="fechaContratacion" />
+                <ScalarProperty Name="idRol" ColumnName="idRol" />
+                <ScalarProperty Name="idLocalidad" ColumnName="idLocalidad" />
+                <ScalarProperty Name="username" ColumnName="username" />
+                <ScalarProperty Name="claveacc" ColumnName="claveacc" />
+                <ScalarProperty Name="idSupervisor" ColumnName="idSupervisor" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="estados">
+            <EntityTypeMapping TypeName="ReposicionesModel.estado">
+              <MappingFragment StoreEntitySet="estados">
+                <ScalarProperty Name="estado1" ColumnName="estado" />
+                <ScalarProperty Name="idEstado" ColumnName="idEstado" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

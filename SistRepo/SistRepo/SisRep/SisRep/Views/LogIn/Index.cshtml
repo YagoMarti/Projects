@@ -1,0 +1,25 @@
+﻿
+@{
+    ViewBag.Title = "Log In";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Inicio de sesión</h2>
+<form role="form" action="@Url.Action("IniciarSesion", "Usuario")" method="Post">
+    <fieldset>
+        <legend></legend>
+        <div>
+            <label>Usuario: </label>
+            <input type="text" name="username" />
+        </div>
+        <div>
+            <label>Contraseña: </label>
+            <input type="password" name="claveacc" />
+        </div>
+        <div>
+            <button type="submit"> Iniciar Sesión </button>
+        </div>
+        <label>De no recordar su clave, dirigirse a su supervisor.</label>
+    </fieldset>
+</form>
+

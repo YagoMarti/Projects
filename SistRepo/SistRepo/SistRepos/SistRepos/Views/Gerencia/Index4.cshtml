@@ -1,0 +1,131 @@
+﻿@model IEnumerable<SistRepos.Models.ger5>
+@{
+    ViewBag.Title = "Sistema de Reposiciones";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+ 
+<form role="form" action="@Url.Action("Index4")" method="Post" class="form-horizontal" id="formulario">
+    <div class="form-group">
+        <div class="col-lg-3"></div>
+        <div class="col-lg-4">
+            <fieldset>
+                <legend>Consultar desvios de operarios por supervisor</legend>
+                <div class="form-group">
+                    <label for="nombre" class="col-lg-4 control-label"> Elija el Supervisor: </label>
+                    <div class="col-lg-8">
+                        @Html.DropDownList("idSupervisor", null, String.Empty, new { @class = "form-control" , @required = "required" })
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="nombre" class="col-lg-4 control-label">Filtrar por mes: </label>
+                    <div class="col-lg-8">
+                        <input type="month" name="fecha" min="01-2014" class="form-control" value="@ViewBag.date">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-lg-2 col-lg-offset-4"><input type="submit" name="print" value="Consultar" onclick="funcImprimirNot()" class="btn btn-default" /></div>
+                    @if (Model != null)
+                    {
+                        <div class="col-lg-2 col-lg-offset-4">
+                            <input type="submit" class="btn btn-default" name="print" value="Imprimir" onclick="funcImprimir()" />
+
+                        </div> }
+                </div>
+            </fieldset>
+        </div>
+    </div>
+</form>
+
+
+    @if (Model != null)
+    {
+        <table class="table table-striped table-hover ">
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.operario)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.herramienta)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.estimado)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.tmedio)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.porcFuera)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.exceso)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.tratadas)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.excedidas)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.porcExceso)
+                </th>
+                <th>
+
+                </th>
+            </tr>
+
+
+
+            @foreach (var item in Model)
+            {
+                <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.operario)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.herramienta)
+                        </td>
+                        @if (item.herramienta != "") {
+                            <td>
+                            @Html.DisplayFor(modelItem => item.estimado)
+                             </td>
+                             }
+                            else { <td></td> }
+                       <td>
+                        @Html.DisplayFor(modelItem => item.tmedio)
+                       </td>
+@if (item.herramienta != "" )  {
+                    <td>
+                        @Html.DisplayFor(modelItem => item.porcFuera) %
+                    </td>
+     }
+                            else { <td></td> }
+                       <td>
+                            @Html.DisplayFor(modelItem => item.exceso)
+                        </td>
+                        @if (item.herramienta != ""){
+                            <td>
+                            @Html.DisplayFor(modelItem => item.tratadas)
+                             </td> }
+                        else { <td></td> }
+                        @if (item.herramienta != "")  {
+                        <td>
+                            @Html.DisplayFor(modelItem => item.excedidas)
+                        </td>}
+                        else {<td></td> }
+                        @if (item.herramienta != "") 
+                            {
+                        <td>
+                            @Html.DisplayFor(modelItem => item.porcExceso) %
+                        </td>}
+                        else { <td></td> }
+                        <td>
+
+                        </td>
+                    </tr>
+                }
+
+        </table>
+    }
+
+
+

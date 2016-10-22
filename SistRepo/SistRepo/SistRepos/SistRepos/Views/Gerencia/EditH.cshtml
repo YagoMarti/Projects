@@ -1,0 +1,40 @@
+﻿@model SistRepos.Models.herramientas
+
+@{
+    ViewBag.Title = "Sistema de Reposiciones";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<form role="form" action="@Url.Action("EditH")" method="Post" class="form-horizontal">
+
+    @Html.AntiForgeryToken()
+    <div class="form-group">
+        @Html.ValidationSummary(true)
+        @Html.HiddenFor(model => model.idHerramienta)
+        <div class="col-lg-3"></div>
+        <div class="col-lg-4">
+            <fieldset> <legend>Cambiar stock de <strong> @Model.herramienta </strong>  </legend>
+                <div class="form-group">
+                    <label class="col-lg-4 control-label">
+                        @Html.LabelFor(model => model.stock)
+                    </label>
+                    <div class="col-md-8">
+                        @Html.TextBoxFor(model => model.stock, new { @class = "form-control" })
+                    </div> <div class="col-lg-3">
+                        @Html.ValidationMessageFor(model => model.stock)
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-lg-2"></div>
+                    <div class="col-lg-2"><a href="javascript:history.back(-1);" class="btn btn-danger" role="button">Cancelar</a></div>
+                    <div class="col-lg-2">
+                        <input type="submit" value="Guardar" class="btn btn-default" />
+                    </div>
+                </div>
+            </fieldset>
+        </div>
+    </div>
+</form>
+                
+
+

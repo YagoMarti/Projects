@@ -1,0 +1,86 @@
+﻿@model IEnumerable<SistRepos.Models.usuarios>
+
+@{
+    ViewBag.Title = "Sistema de Reposiciones";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<form role="form" class="form-horizontal">
+    <div class="form-group">
+        <div class="col-lg-3"></div>
+        <div class="col-lg-4">
+            <fieldset>
+                <legend>Lista de operarios</legend>
+            </fieldset>
+        </div>
+    </div>
+</form>
+
+@if (Model != null) {
+<table class="table table-striped table-hover">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.nombre)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.apellido)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.telefono)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.username)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.localidades.localidad)
+        </th>
+        <th></th><th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.nombre)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.apellido)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.telefono)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.username)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.localidades.localidad)
+        </td>
+        <td>
+            @Html.ActionLink("Editar", "Edit", new { id = item.idUsuario })
+        </td>
+        <td>
+            @Html.ActionLink("Reiniciar Clave", "ReiniciarClave", new { id = item.idUsuario }, new { onclick = "return confirm('Confirme si desea reiniciar la clave de : " + item.username + " ');" })
+        </td>
+    </tr>
+}
+
+</table>
+    <form role="form" class="form-horizontal">
+    <div class="form-group">
+        <div class="col-lg-9"></div>
+        <div class="col-lg-3">
+            <input type="button" class="btn btn-default" onclick="window.open('/JefeOperario/Index1Print', 'newPage');" name="print" value="Imprimir" />
+        </div>
+    </div>
+</form>
+}
+
+@if(ViewBag.dato == "uno")
+{
+    <div class="col-lg-6"></div>
+        <div class="col-lg-4">
+            <div class="col-lg-2"><a href="/JefeOperario/Index" class="btn btn-danger" role="button">Volver a la lista</a></div>
+        </div>
+}
+
+
+    

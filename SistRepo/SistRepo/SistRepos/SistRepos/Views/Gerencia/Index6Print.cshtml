@@ -1,0 +1,119 @@
+﻿@model IEnumerable<SistRepos.Models.ger5>
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Sistema de Reposiciones</title>
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap-theme.min.css">
+    <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+
+</head>
+    <body onload="window.print();">
+        <div>
+            <h4> Desvios totales - Supervisor: @ViewBag.sup - Período @ViewBag.date </h4>
+            <table class="table">
+                <tr>
+                    <th>
+                        @Html.DisplayNameFor(model => model.supervisor)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.herramienta)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.estimado)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.tmedio)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.porcFuera)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.exceso)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.tratadas)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.excedidas)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.porcExceso)
+                    </th>
+                    <th>
+
+                    </th>
+                </tr>
+
+
+
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.supervisor)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.herramienta)
+                        </td>
+                        @if (item.herramienta != "")
+                        {
+                            <td>
+                                @Html.DisplayFor(modelItem => item.estimado)
+                            </td>
+                        }
+                        else
+                        {
+                            <td></td> }
+                        <td>
+                            @Html.DisplayFor(modelItem => item.tmedio)
+                        </td>
+                        @if (item.herramienta != "")
+                        {
+                            <td>
+                                @Html.DisplayFor(modelItem => item.porcFuera) %
+                            </td>
+                        }
+                        else
+                        {
+                            <td></td> }
+                        <td>
+                            @Html.DisplayFor(modelItem => item.exceso)
+                        </td>
+                        @if (item.herramienta != "")
+                        {
+                            <td>
+                                @Html.DisplayFor(modelItem => item.tratadas)
+                            </td> }
+                        else
+                        {
+                            <td></td> }
+                        @if (item.herramienta != "")
+                        {
+                            <td>
+                                @Html.DisplayFor(modelItem => item.excedidas)
+                            </td>}
+                        else
+                        {
+                            <td></td> }
+                        @if (item.herramienta != "")
+                        {
+                            <td>
+                                @Html.DisplayFor(modelItem => item.porcExceso) %
+                            </td>}
+                        else
+                        {
+                            <td></td> }
+                    </tr>
+                }
+            </table>
+        </div>
+
+    </body>
+</html>

@@ -1,0 +1,165 @@
+﻿@model IEnumerable<SistRepos.Models.reposiciones>
+
+@{
+    ViewBag.Title = "Sistema de Reposiciones";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<form role="form" class="form-horizontal">
+    <div class="form-group">
+        <div class="col-lg-3"></div>
+        <div class="col-lg-4">
+            <fieldset>
+                <legend>Solicitudes activas no asignadas</legend>
+            </fieldset>
+        </div>
+    </div>
+</form>
+@if (Model != null) {
+<table class="table table-striped table-hover ">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.horaCreacion)
+        </th>
+        <th>
+            Asignación estimada
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.herramientas.herramienta)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.puestos.puesto)
+        </th>
+        <th>
+            Solicitante
+        </th>
+
+        <th></th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        if (item.comentario == "bajo")
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.horaCreacion)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.horaResolucion)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.herramientas.herramienta)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.puestos.puesto)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.solicitantes.username)
+                </td>
+
+                @if (item.idEstado == 1)
+                {
+                    <td>
+                        @Html.ActionLink("Asignar", "Reasignar", new { id = item.idReposicion })
+                    </td>
+                    <td>
+                        @Html.ActionLink("Detalles", "Details", new { id = item.idReposicion })
+                    </td>}
+            </tr> }
+
+
+        if (item.comentario == "medio")
+        {
+            <tr class="warning">
+                <td>
+                    @Html.DisplayFor(modelItem => item.horaCreacion)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.horaResolucion)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.herramientas.herramienta)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.puestos.puesto)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.solicitantes.username)
+                </td>
+
+                @if (item.idEstado == 1)
+                {
+                    <td>
+                        @Html.ActionLink("Asignar", "Reasignar", new { id = item.idReposicion })
+                    </td>
+                    <td>
+                        @Html.ActionLink("Detalles", "Details", new { id = item.idReposicion })
+                    </td>}
+            </tr> }
+        if (item.comentario == "alto")
+        {
+            <tr class="danger">
+                <td>
+                    @Html.DisplayFor(modelItem => item.horaCreacion)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.horaResolucion)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.herramientas.herramienta)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.puestos.puesto)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.solicitantes.username)
+                </td>
+
+                @if (item.idEstado == 1)
+                {
+                    <td>
+                        @Html.ActionLink("Asignar", "Reasignar", new { id = item.idReposicion })
+                    </td>
+                    <td>
+                        @Html.ActionLink("Detalles", "Details", new { id = item.idReposicion })
+                    </td>}
+            </tr> }
+    }
+
+</table>
+<div class="col-md-2 col-md-offset-9">
+    <ul class="pager">
+        @switch ((int)ViewBag.caso)
+        {
+            case 0:
+                {
+                    <li class="previous disabled"><a href="#">← Anterior</a></li>
+                    <li class="next"><a href="/JefeOperario/Index2/@Html.Raw(Html.AttributeEncode(ViewBag.sig))"> Siguiente →</a></li> ; break;
+                }
+            case 1:
+                {
+                    <li class="previous"><a href="/JefeOperario/Index2/@Html.Raw(Html.AttributeEncode(ViewBag.volver))">← Anterior</a></li>
+                    <li class="next"><a href="/JefeOperario/Index2/@Html.Raw(Html.AttributeEncode(ViewBag.sig))"> Siguiente →</a></li> ; break;
+                }
+            case 2:
+                {
+                    <li class="previous"><a href="/JefeOperario/Index2/@Html.Raw(Html.AttributeEncode(ViewBag.volver))">← Anterior</a></li>
+                    <li class="next disabled"><a href="#"> Siguiente →</a></li> ; break;
+                }
+            case 3:
+                {
+                    <li class="previous disabled"><a href="#">← Anterior</a></li>
+                    <li class="next disabled"><a href="#"> Siguiente →</a></li> ; break;
+                }
+        }
+    </ul>
+
+</div>
+}
+else
+{
+<label>No se encontraron Solicitudes</label>
+}

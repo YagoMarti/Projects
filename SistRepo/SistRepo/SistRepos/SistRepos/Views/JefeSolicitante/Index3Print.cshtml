@@ -1,0 +1,73 @@
+﻿@model IEnumerable<SistRepos.Models.reposiciones>
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Sistema de Reposiciones</title>
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap-theme.min.css">
+    <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+
+</head>
+<body onload="window.print();">
+    <h4>Solicitudes hasta el @DateTime.Today.ToString("d") - Solicitante @ViewBag.solicitante</h4>
+    <div>
+        <br />
+        @if (Model != null)
+        {
+            <table class="table">
+              <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.horaCreacion)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.horaAsignacion)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.horaResolucion)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.herramientas.herramienta)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.puestos.puesto)
+            </th>
+            <th>
+                Operario
+            </th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.horaCreacion)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.horaAsignacion)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.horaResolucion)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.herramientas.herramienta)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.puestos.puesto)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.operarios.username)
+                </td>
+            </tr>
+        }
+
+    </table>
+}
+    </div>
+</body>
+</html>

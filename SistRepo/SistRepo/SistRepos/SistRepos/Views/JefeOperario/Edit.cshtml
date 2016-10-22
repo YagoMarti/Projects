@@ -1,0 +1,79 @@
+﻿@model SistRepos.Models.usuarios
+
+@{
+    ViewBag.Title = "Sistema de Reposiciones";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<form role="form" action="@Url.Action("Edit")" method="Post" class="form-horizontal">
+    @Html.AntiForgeryToken()
+    <div class="form-group">
+        @Html.ValidationSummary(true)
+        @Html.HiddenFor(model => model.idUsuario)
+        <div class="col-lg-3"></div>
+        <div class="col-lg-4">
+            <fieldset>
+                <legend>Modificar datos del usuario: <strong> @ViewBag.NombreUsuario </strong></legend>
+                <div class="form-group">
+                    <label class="col-lg-4 control-label">
+                        @Html.LabelFor(model => model.nombre)
+                    </label>
+                    <div class="col-md-8">
+                        @Html.TextBoxFor(model => model.nombre, new { @class = "form-control" })
+                    </div> <div class="col-lg-3">
+                        @Html.ValidationMessageFor(model => model.nombre)
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.apellido, new { @class = "control-label col-md-4" })
+                    <div class="col-md-8">
+                        @Html.TextBoxFor(model => model.apellido, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.apellido)
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.telefono, new { @class = "control-label col-md-4" })
+                    <div class="col-md-8">
+                        @Html.TextBoxFor(model => model.telefono, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.telefono)
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.idLocalidad, "idLocalidad", new { @class = "control-label col-md-4" })
+                    <div class="col-md-8">
+                        @Html.DropDownList("idLocalidad", null, String.Empty, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.idLocalidad)
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.username, new { @class = "control-label col-md-4" })
+                    <div class="col-md-8">
+                        @Html.TextBoxFor(model => model.username, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.username)
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="col-lg-2"></div>
+                    <div class="col-lg-2"><a href="javascript:history.back(-1);" class="btn btn-danger" role="button">Cancelar</a></div>
+                    <div class="col-lg-2">
+                        <input type="submit" value="Confirmar" class="btn btn-default" />
+                    </div>
+                </div>
+            </fieldset>
+        </div>
+    </div>
+</form>
+
+
+
+<script src="~/Scripts/jquery-1.10.2.min.js"></script>
+<script src="~/Scripts/jquery.validate.min.js"></script>
+<script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+
+
+

@@ -1,0 +1,46 @@
+﻿@model IEnumerable<SistRepos.Models.herramientas>
+
+@{
+    ViewBag.Title = "Sistema de Reposiciones";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<form role="form" class="form-horizontal">
+    <div class="form-group">
+        <div class="col-lg-3"></div>
+        <div class="col-lg-4">
+            <fieldset>
+                <legend>Stock de herramientas</legend>
+            </fieldset>
+        </div>
+    </div>
+</form>
+@if (Model != null)
+{
+<table class="table table-striped table-hover">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.herramienta)
+        </th>
+        <th>
+            Stock Existente
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.herramienta)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.stock)
+        </td>
+        <td>
+            @Html.ActionLink("Cambiar Stock", "EditH", new { id=item.idHerramienta }) 
+        </td>
+    </tr>
+}
+
+</table>
+}

@@ -1,0 +1,71 @@
+﻿@model IEnumerable<SistRepos.Models.ger5>
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Sistema de Reposiciones</title>
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap-theme.min.css">
+    <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+
+</head>
+<body onload="window.print();">
+    <div>
+        <h4>Tratadas fuera de tiempo - <strong>@ViewBag.usu</strong></h4>
+        <table class="table">
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.herramienta)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.horaCreacion)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.estimado)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.tiempo)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.puesto)
+                </th>
+@if (ViewBag.sup == "true") {
+                <th>
+                    @Html.DisplayNameFor(model => model.operario)
+                </th> }
+            </tr>
+
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.herramienta)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.horaCreacion)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.estimado)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.tiempo)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.puesto)
+                    </td>
+@if (ViewBag.sup == "true") {
+                    <td>
+                        @Html.DisplayFor(modelItem => item.operario)
+                    </td> }
+                </tr>
+            }
+
+        </table>
+</div>
+</body>
+</html>

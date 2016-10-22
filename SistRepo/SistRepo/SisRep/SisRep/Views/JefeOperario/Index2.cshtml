@@ -1,0 +1,78 @@
+﻿@model IEnumerable<SisRep.Models.reposicione>
+
+@{
+    ViewBag.Title = "Index2";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Index2</h2>
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.comentario)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.horaCreacion)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.horaAsignacion)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.horaResolucion)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.herramienta.herramienta1)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.puesto.puesto1)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.usuario.nombre)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.usuario1.nombre)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.estado.estado1)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.comentario)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.horaCreacion)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.horaAsignacion)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.horaResolucion)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.herramienta.herramienta1)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.puesto.puesto1)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.usuario.username)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.usuario1.username)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.estado.estado1)
+        </td>
+        @if (item.idEstado == 1) { 
+        <td>
+            @Html.ActionLink("Asignar", "Reasignar", new { id = item.idReposicion })
+        </td> }
+    </tr>
+}
+
+</table>

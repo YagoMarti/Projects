@@ -1,0 +1,61 @@
+﻿@model IEnumerable<SisRep.Models.usuario>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Lista de operarios : </h2>
+
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.nombre)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.apellido)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.telefono)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.username)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.localidade.localidad)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.role.rol)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.nombre)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.apellido)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.telefono)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.username)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.localidade.localidad)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.role.rol)
+        </td>
+        <td>
+            @Html.ActionLink("Editar", "Edit", new { id=item.idUsuario }) |
+            @Html.ActionLink("Reiniciar Clave", "ReiniciarClave", new { id = item.idUsuario }, new { onclick = "return confirm('Confirme si desea reiniciar la clave de : " + item.username + " ');" })
+        </td>
+    </tr>
+}
+
+</table>

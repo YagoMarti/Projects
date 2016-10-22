@@ -1,0 +1,81 @@
+﻿@model SistRepos.Models.reposiciones
+
+@{
+    ViewBag.Title = "Sistema de Reposiciones";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@if (Model != null)
+{
+    <form role="form" class="form-horizontal">
+        <div class="form-group">
+            <div class="col-lg-1"></div>
+            <div class="col-lg-4">
+                <fieldset>
+                    <legend>Detalles</legend>
+                    <div class="form-group">
+                        <label class="col-lg-4 control-label">@Html.DisplayNameFor(model => model.idReposicion)</label>
+                        <label class="col-lg-8 control-label">
+                            @Html.DisplayFor(model => model.idReposicion, new { @class = "form-control" })
+                        </label>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-lg-4 control-label">@Html.DisplayNameFor(model => model.herramientas.herramienta)</label>
+                        <label class="col-lg-8 control-label">
+                            @Html.DisplayFor(model => model.herramientas.herramienta)
+                        </label>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-lg-4 control-label">@Html.DisplayNameFor(model => model.puestos.puesto)</label>
+                        <label class="col-lg-8 control-label">
+                            @Html.DisplayFor(model => model.puestos.puesto)
+                        </label>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-lg-4 control-label">@Html.DisplayNameFor(model => model.comentario)</label>
+                        <label class="col-lg-8 control-label">
+                            @Html.DisplayFor(model => model.comentario)
+                        </label>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-lg-4 control-label">@Html.DisplayNameFor(model => model.horaCreacion)</label>
+                        <label class="col-lg-8 control-label">
+                            @Html.DisplayFor(model => model.horaCreacion)
+                        </label>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-lg-4 control-label">@Html.DisplayNameFor(model => model.horaAsignacion)</label>
+                        <label class="col-lg-8 control-label">
+                            @Html.DisplayFor(model => model.horaAsignacion)
+                        </label>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-lg-4 control-label">@Html.DisplayNameFor(model => model.horaResolucion)</label>
+                        <label class="col-lg-8 control-label">
+                            @Html.DisplayFor(model => model.horaResolucion)
+                        </label>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-lg-4 control-label">Solicitante</label>
+                        <label class="col-lg-8 control-label">
+                            @Html.DisplayFor(model => model.solicitantes.username)
+                        </label>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-lg-4 control-label">Operario</label>
+                        <label class="col-lg-8 control-label">
+                            @Html.DisplayFor(model => model.operarios.username)
+                        </label>
+                    </div> <hr />
+                    <div class="form-group">
+                        <label class="col-lg-10 control-label"></label>
+                        <label class="col-lg-2">
+                            <a href="javascript:history.back(-1);" class="btn btn-danger" role="button">Volver</a>
+                        </label>
+                    </div>
+                </fieldset>
+            </div>
+        </div>
+    </form>
+}

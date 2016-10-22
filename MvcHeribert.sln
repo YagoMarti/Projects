@@ -1,0 +1,28 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2013
+VisualStudioVersion = 12.0.40629.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MvcHeribert", "MvcHeribert\MvcHeribert.csproj", "{06A5DD72-F66B-4243-ABA6-3D3F7CF46735}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MvcHeribert.Tests", "MvcHeribert\MvcHeribert.Tests\MvcHeribert.Tests.csproj", "{DDF00923-012F-4D21-8FF2-E30AF136D6FA}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{06A5DD72-F66B-4243-ABA6-3D3F7CF46735}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{06A5DD72-F66B-4243-ABA6-3D3F7CF46735}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{06A5DD72-F66B-4243-ABA6-3D3F7CF46735}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{06A5DD72-F66B-4243-ABA6-3D3F7CF46735}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DDF00923-012F-4D21-8FF2-E30AF136D6FA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DDF00923-012F-4D21-8FF2-E30AF136D6FA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DDF00923-012F-4D21-8FF2-E30AF136D6FA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DDF00923-012F-4D21-8FF2-E30AF136D6FA}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="1ede40fbb82248dd9a42167e7202b0a4" Name="Diagram1">
+        <EntityTypeShape EntityType="ReposicionesModel.estados" Width="1.5" PointX="5.25" PointY="7.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="ReposicionesModel.herramientas" Width="1.5" PointX="5.25" PointY="9.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="ReposicionesModel.localidades" Width="1.5" PointX="3" PointY="3.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="ReposicionesModel.pisos" Width="1.5" PointX="3" PointY="12.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ReposicionesModel.provincias" Width="1.5" PointX="0.75" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ReposicionesModel.puestos" Width="1.5" PointX="5.25" PointY="12.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ReposicionesModel.reposiciones" Width="1.5" PointX="7.5" PointY="2.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="ReposicionesModel.roles" Width="1.5" PointX="3" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ReposicionesModel.sucursales" Width="1.5" PointX="0.75" PointY="13" IsExpanded="true" />
+        <EntityTypeShape EntityType="ReposicionesModel.usuarios" Width="1.5" PointX="5.25" PointY="2.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="ReposicionesModel.canceladas" Width="1.5" PointX="3" PointY="6.125" IsExpanded="true" />
+        <AssociationConnector Association="ReposicionesModel.fk_estado" ManuallyRouted="false" />
+        <AssociationConnector Association="ReposicionesModel.fk_her" ManuallyRouted="false" />
+        <AssociationConnector Association="ReposicionesModel.fk_loc" ManuallyRouted="false" />
+        <AssociationConnector Association="ReposicionesModel.fk_prov" ManuallyRouted="false" />
+        <AssociationConnector Association="ReposicionesModel.fk_piso" ManuallyRouted="false" />
+        <AssociationConnector Association="ReposicionesModel.fk_suc" ManuallyRouted="false" />
+        <AssociationConnector Association="ReposicionesModel.fk_pue" ManuallyRouted="false" />
+        <AssociationConnector Association="ReposicionesModel.fk_op" ManuallyRouted="false" />
+        <AssociationConnector Association="ReposicionesModel.fk_sol" ManuallyRouted="false" />
+        <AssociationConnector Association="ReposicionesModel.fk_rol" ManuallyRouted="false" />
+        <AssociationConnector Association="ReposicionesModel.fk_sup" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

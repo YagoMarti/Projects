@@ -1,0 +1,67 @@
+﻿@model SistRepos.Models.herramientas
+
+@{
+    ViewBag.Title = "Sistema de Reposiciones";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<form role="form" action="@Url.Action("cargarH")" method="Post" class="form-horizontal">
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+
+    <div class="form-group">
+        <div class="col-lg-3"></div>
+        <div class="col-lg-4">
+            <fieldset>
+                <legend>Cargar Herramientas</legend>
+
+                <div class="form-group">
+                    <label class="col-lg-4 control-label">Herramienta</label>
+                    <div class="col-lg-8">
+                        @Html.TextBoxFor(model => model.herramienta, new { @class = "form-control", @placeholder = "ingrese el nombre de la herramienta", @required = "required" })
+                    </div>
+                    <div class="col-lg-3">
+                        @Html.ValidationMessageFor(model => model.herramienta)
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="col-lg-4 control-label">Stock</label>
+                    <div class="col-lg-8">
+                       
+                        <input type="number" name="stock" class="form-control" min="1" max="500" required />
+                    </div>
+                    <div class="col-lg-3">
+                        @Html.ValidationMessageFor(model => model.stock)
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="col-lg-4 control-label">Tiempo Estimado</label>
+                    <div class="col-lg-8">
+
+                        <input type="number" name="estimado" class="form-control" min="1" max="60" required />
+                    </div>
+                    <div class="col-lg-3">
+                        @Html.ValidationMessageFor(model => model.estimado)
+                    </div>
+                </div>
+
+
+
+                <div class="form-group">
+                    <div class="col-lg-2"></div>
+                    <div class="col-lg-2"><a href="javascript:history.back(-1);" class="btn btn-danger" role="button">Cancelar</a></div>
+                    <div class="col-lg-2">
+                        <input type="submit" value="Cargar" class="btn btn-default" />
+                    </div>
+                </div>
+
+                <div class="alert alert-dismissable alert-info">
+                    <button type="button" class="close" data-dismiss="alert">×</button>
+                    @ViewBag.aviso
+                </div>
+            </fieldset>
+        </div>
+    </div>
+</form>
